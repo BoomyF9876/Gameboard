@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <vector>
+#include <string>
 #include "GameObject/UserPlayer.h"
 using namespace std;
 
@@ -7,9 +8,9 @@ class Game {
     private:
         int width, height, numDeadBlocks, numHit;
         GameObject block;
-        vector<GameObject*> gameboard;
-        vector<vector<int>> deadBlockLocation;
         UserPlayer* player;
+        vector<vector<int>> deadBlockLocation;
+        vector<vector<GameObject*>> gameboard;
 
     public:
         Game(UserPlayer p_, GameObject b_);
@@ -17,4 +18,5 @@ class Game {
 
         void printGameBoard();
         void playGame();
+        void readBoardFromCSV(string filename);
 };
