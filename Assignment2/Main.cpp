@@ -7,7 +7,11 @@ int main() {
     GameObject block = GameObject('-');
 
     Game* game = new Game(player, block);
-    game->readBoardFromCSV("gameboard.csv");
 
+    game->readBoardFromCSV("gameboard.csv");
     game->playGame();
+
+    delete game;
+    game = nullptr;
+    system("pause");
 }

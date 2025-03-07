@@ -25,7 +25,7 @@ bool UserPlayer::move(char direction, int maxWidth, int maxHeight) {
             y--;
             return true;
         case 's':
-            if (y >= maxHeight - 1) return false;
+            if (y >= maxHeight) return false;
             y++;
             return true;
         case 'a':
@@ -33,7 +33,7 @@ bool UserPlayer::move(char direction, int maxWidth, int maxHeight) {
             x--;
             return true;
         case 'd':
-            if (x >= maxWidth - 1) return false;
+            if (x >= maxWidth) return false;
             x++;
             return true;
         default:
