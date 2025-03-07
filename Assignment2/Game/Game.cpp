@@ -14,7 +14,7 @@ Game::~Game() {
     delete player;
 };
 
-void SetColor(int value){
+void SetColor(int value) {
     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),  value);
 }
 
