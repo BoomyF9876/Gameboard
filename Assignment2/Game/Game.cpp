@@ -2,6 +2,7 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include <conio.h>
 #include "Game.h"
 
 Game::Game(UserPlayer p_, GameObject b_): block(b_),  height(0), width(0), numDeadBlocks(0), numHit(0) {
@@ -13,11 +14,12 @@ Game::~Game() {
 
 void Game::printGameBoard() {
     for (int i = 0; i < gameboard.size(); i++) {
+        cout << endl;
         for (int j = 0; j < gameboard[i].size(); j++) {
             cout<<gameboard[i][j] -> getSymbol();
         }
-        cout << endl;
     }
+    cout << endl;
 };
 void Game::playGame() {
     int threshold = 80;
@@ -29,9 +31,10 @@ void Game::playGame() {
     while (userInput != 'q') {
         printGameBoard();
         cout<<"Enter a move (wasd) or (q) to quit: ";
-        cin>>userInput;
+        userInput = _getch();
+        cout<<endl;
 
-        gameboard[player->getX()][player->getY()] = &block;
+        gameboard[player->getY()][player->getX()] = &block;
         bool status = player->move(userInput, width, height);
 
         if (!status) {
@@ -42,7 +45,7 @@ void Game::playGame() {
             }
         }
 
-        gameboard[player->getX()][player->getY()] = player;        
+        gameboard[player->getY()][player->getX()] = player;        
     }
 
     system("pause");
@@ -55,12 +58,9 @@ void Game::readBoardFromCSV(string filename) {
     string line, word;
     int rowCount = 0, columnCount = 0;
 
-    while (!fin.eof()) {
-
+    while (getline(fin, line)) {
         row.clear();
         columnCount = 0;
-
-        getline(fin, line);
         stringstream s(line);
 
         while (getline(s, word, ',')) {
