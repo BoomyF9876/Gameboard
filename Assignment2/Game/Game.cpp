@@ -1,10 +1,11 @@
-#include <iterator>
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include <algorithm>
 #include <conio.h>
 #include <windows.h>
 #include "Game.h"
+using namespace std;
 
 Game::Game(UserPlayer p_, GameObject b_): block(b_),  height(0), width(0), numDeadBlocks(0), numHit(0) {
     player = new UserPlayer(p_.getX(), p_.getY(), p_.getSymbol());
@@ -23,27 +24,26 @@ void Game::printGameBoard() {
         for (int j = 0; j < gameboard[i].size(); j++) {
             char symbol = gameboard[i][j] -> getSymbol();
             if (symbol == 'X') {
-                SetColor(4);
+                SetColor(4); // Red
             } else {
-                SetColor(1);
+                SetColor(1); // Blue
             }
             cout<<symbol;
         }
     }
-    SetColor(15);
+    SetColor(15); // White
     cout << endl;
 };
 void Game::playGame() {
-    int threshold = 80; //TODO
     char userInput;
     
     cout<<"Welcome to the game. There are "<<numDeadBlocks<<" hidden deadly blocks."<<endl;
-    cout<<"Try to reach the bottom right corner without being hit by "<<threshold<<"%% of them :)"<<endl;
+    cout<<"Try to reach the bottom right corner without being hit by 80%% of them :)"<<endl;
     
     while (player->getX() < width || player->getY() < height) {
         printGameBoard();
         cout<<"Enter a move (wasd) or (q) to quit: ";
-        userInput = _getch();
+        userInput = _getch(); // To take in user inputs without waiting for the enter key
         cout<<endl;
 
         gameboard[player->getY()][player->getX()] = &block;
@@ -58,15 +58,21 @@ void Game::playGame() {
                 cout<<"cannot move in that direction"<<endl;
             }
         } else {
-            // TODO: Calculate numHit
-        
+            vector<int> playerPosition = {player->getX(), player->getY()};
+            vector<vector<int>>::iterator index = find(deadBlockLocation.begin(), deadBlockLocation.end(), playerPosition);
+            if (index != deadBlockLocation.end()) {
+                numHit++;
+                deadBlockLocation.erase(index);
+                cout<<"You Got Hit! You have been hit "<<numHit<<" out of "<<numDeadBlocks<<endl;
+            }
         }
 
         gameboard[player->getY()][player->getX()] = player;
     }
 
     printGameBoard();
-    cout<<"You win!"<<endl; // TODO
+    cout<<"You have reached the end!"<<endl;
+    cout<<"You have been hit "<<numHit<<" out of "<<numDeadBlocks<<" throughout your journey."<<endl;
 };
 void Game::readBoardFromCSV(string filename) {
     fstream fin;

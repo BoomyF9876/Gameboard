@@ -13,5 +13,7 @@ int main() {
 
     delete game;
     game = nullptr;
+
+    // Pause to keep the console open
     system("pause");
 }
