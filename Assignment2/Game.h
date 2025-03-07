@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <vector>
 #include <string>
-#include "../GameObject/UserPlayer.h"
+#include "UserPlayer.h"
 using namespace std;
 
 class Game {

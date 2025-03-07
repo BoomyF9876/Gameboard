@@ -1,6 +1,5 @@
 #include <stdio.h>
-#include "Game/Game.h"
-using namespace std;
+#include "Game.h"
 
 int main() {
     UserPlayer player = UserPlayer(0, 0, 'X');

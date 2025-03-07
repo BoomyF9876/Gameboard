@@ -18,24 +18,24 @@
     <ClCompile Include="Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Game\Game.cpp">
+    <ClCompile Include="Game.cpp">
       <Filter>Resource Files</Filter>
     </ClCompile>
-    <ClCompile Include="GameObject\GameObject.cpp">
+    <ClCompile Include="GameObject.cpp">
       <Filter>Resource Files</Filter>
     </ClCompile>
-    <ClCompile Include="GameObject\UserPlayer.cpp">
+    <ClCompile Include="UserPlayer.cpp">
       <Filter>Resource Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="GameObject\GameObject.h">
+    <ClInclude Include="Game.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="GameObject\UserPlayer.h">
+    <ClInclude Include="GameObject.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Game\Game.h">
+    <ClInclude Include="UserPlayer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
