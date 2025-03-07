@@ -1,7 +1,7 @@
 #include "UserPlayer.h"
 
-UserPlayer::UserPlayer(int x_, int y_, char s): x(x_), y(y_), GameObject::GameObject(s) {};
-UserPlayer::~UserPlayer() { GameObject::~GameObject(); };
+UserPlayer::UserPlayer(int x_, int y_, char s): x(x_), y(y_), GameObject(s) {};
+UserPlayer::~UserPlayer() {};
 
 void UserPlayer::setX(int x_) {
     x = x_;

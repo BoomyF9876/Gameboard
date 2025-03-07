@@ -12,11 +12,16 @@ Game::~Game() {
 };
 
 void Game::printGameBoard() {
-
+    for (int i = 0; i < gameboard.size(); i++) {
+        for (int j = 0; j < gameboard[i].size(); j++) {
+            cout<<gameboard[i][j] -> getSymbol();
+        }
+        cout << endl;
+    }
 };
 void Game::playGame() {
     int threshold = 80;
-    char userInput;
+    char userInput = 'w';
     
     cout<<"Welcome to the game. There are "<<numDeadBlocks<<" hidden deadly blocks."<<endl;
     cout<<"Try to reach the bottom right corner without being hit by "<<threshold<<"%% of them :)"<<endl;
@@ -26,9 +31,18 @@ void Game::playGame() {
         cout<<"Enter a move (wasd) or (q) to quit: ";
         cin>>userInput;
 
+        gameboard[player->getX()][player->getY()] = &block;
         bool status = player->move(userInput, width, height);
 
-        //
+        if (!status) {
+            if (userInput != 'w' && userInput != 's' && userInput != 'a' && userInput != 'd') {
+                cout<<"invalid move."<<endl;
+            } else {
+                cout<<"cannot move in that direction"<<endl;
+            }
+        }
+
+        gameboard[player->getX()][player->getY()] = player;        
     }
 
     system("pause");
@@ -38,11 +52,10 @@ void Game::readBoardFromCSV(string filename) {
     fin.open(filename, ios::in);
 
     vector<GameObject*> row;
-    string line, word, temp;
+    string line, word;
     int rowCount = 0, columnCount = 0;
 
-    while (fin >> temp)
-    {
+    while (!fin.eof()) {
 
         row.clear();
         columnCount = 0;

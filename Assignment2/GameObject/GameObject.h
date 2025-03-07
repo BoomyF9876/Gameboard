@@ -5,7 +5,6 @@ class GameObject {
     protected:
         char symbol;
     public:
-        GameObject();
         GameObject(char symbol_);
         ~GameObject();
 
